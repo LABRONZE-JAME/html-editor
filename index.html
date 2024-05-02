@@ -1,110 +1,141 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<style>
-			body {
-				background-color: #000000;
-				margin: 0;
-				overflow: hidden;
-			}
-			
-			textarea {
-				resize: none;
-				width: 100%;
-			}
-			
-			.flexboxCon {
-				display: flex;
-			}
-			.sidenav {
-			  height: 100%;
-			  width: 0;
-			  position: fixed;
-			  z-index: 1;
-			  top: 0;
-			  left: 0;
-			  background-color: #111;
-			  overflow-x: hidden;
-			  transition: 0.5s;
-			  padding-top: 60px;
-			}
 
-			.sidenav a {
-			  padding: 8px 8px 8px 32px;
-			  text-decoration: none;
-			  font-size: 25px;
-			  color: #818181;
-			  display: block;
-			  transition: 0.3s;
-			}
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      background-color: #000000;
+      margin: 0;
+      overflow: hidden;
+    }
 
-			.sidenav a:hover {
-			  color: #f1f1f1;
-			}
+    textarea {
+      resize: none;
+      width: 99vw;
+      height: 90vh;
+    }
 
-			.sidenav .closebtn {
-			  position: absolute;
-			  top: 0;
-			  right: 25px;
-			  font-size: 36px;
-			  margin-left: 50px;
-			}
+    #txt {
+      resize: none;
+      width: 99vw;
+      height: 90vh;
+    }
 
-			#main {
-			  transition: margin-left .5s;
-			  padding: 16px;
-			}
+    .flexboxCon {
+      display: flex;
+    }
 
-			@media screen and (max-height: 450px) {
-			  .sidenav {padding-top: 15px;}
-			  .sidenav a {font-size: 18px;}
-			}
-		</style>
-	</head>
-	<body>
-		<div id="mySidenav" class="sidenav">
-		 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		 	<a href="#">About</a>
-		 	<a href="#">Services</a>
-		 	<a href="#">Clients</a>
-		 	<a href="#">Contact</a>
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
 
-			<button id="saveButton">Save as HTML file</button>
-		</div>
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
 
-		<button onclick="openNav()">Open Sidenav</button>
-		
-		<div class="flexbox">
-			<div>
-				<textarea id="htmlTextarea"></textarea>
-			</div>
-			<div></div>
-		</div>
-		
-		<script>
-			function openNav() {
-			  document.getElementById("mySidenav").style.width = "500px";
-			  document.getElementById("main").style.marginLeft = "500px";
-			}
+    .sidenav a:hover {
+      color: #f1f1f1;
+    }
 
-			function closeNav() {
-			  document.getElementById("mySidenav").style.width = "0";
-			  document.getElementById("main").style.marginLeft= "0";
-			}
-			
-			const textarea = document.getElementById('htmlTextarea');
-			const saveButton = document.getElementById('saveButton');
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
 
-			saveButton.addEventListener('click', () => {
-			  const content = textarea.value;
-			  const blob = new Blob([content], { type: 'text/html' });
-			  const url = URL.createObjectURL(blob);
-			  const a = document.createElement('a');
-			  a.href = url;
-			  a.download = 'index.html';
-			  a.click();
-			});
-		</script>
-	</body>
+    #main {
+      transition: margin-left .5s;
+      padding: 16px;
+    }
+
+    #saveButton {
+      cursor: pointer;
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {
+        padding-top: 15px;
+      }
+
+      .sidenav a {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a id="saveButton" onclick="javascript:void(0)">Save as .HTML</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+
+    <button id="saveButton">Save as HTML file</button>
+  </div>
+
+  <button onclick="openNav()">Open Sidenav</button>
+  <input type="file" accept="text" onchange="loadfile(event)">
+
+  <div class="flexboxCon">
+    <div>
+      <textarea id="htmlTextarea"></textarea>
+      <textarea id="txt"></textarea>
+    </div>
+    <div></div>
+  </div>
+
+  <script>
+
+    function loadfile(event) {
+      var fr = new FileReader();
+      fr.onload = function () {
+        txt.value = fr.result;
+      };
+      fr.readAsText(event.target.files[0]);
+    }
+
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "500px";
+      document.getElementById("main").style.marginLeft = "500px";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("main").style.marginLeft = "0";
+    }
+
+    const textarea = document.getElementById('htmlTextarea');
+    const saveButton = document.getElementById('saveButton');
+
+    saveButton.addEventListener('click', () => {
+      const content = textarea.value;
+      const blob = new Blob([content], {type: 'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'index.html';
+      a.click();
+    });
+  </script>
+</body>
+
 </html>
