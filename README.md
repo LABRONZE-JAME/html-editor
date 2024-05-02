@@ -4,7 +4,7 @@ Simple text editor the currently only supports html
 - html Save As
 - Open text file
 ### Possible Future Features:
-- Auto inserting css and js into html document
+- Auto inserting css and js into html document automatically
 - Normal text/markdown maker
 - Base64 encoder
 - Syntax Highlighting
