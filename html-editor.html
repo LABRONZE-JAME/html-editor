@@ -69,10 +69,6 @@
 		 	<a href="#">Services</a>
 		 	<a href="#">Clients</a>
 		 	<a href="#">Contact</a>
-			
-			<textarea id="myTextarea">
-			  This is the content of the textarea.
-			</textarea>
 
 			<button id="saveButton">Save as HTML file</button>
 		</div>
@@ -81,7 +77,7 @@
 		
 		<div class="flexbox">
 			<div>
-				<textarea></textarea>
+				<textarea id="htmlTextarea"></textarea>
 			</div>
 			<div></div>
 		</div>
@@ -97,7 +93,7 @@
 			  document.getElementById("main").style.marginLeft= "0";
 			}
 			
-			const textarea = document.getElementById('myTextarea');
+			const textarea = document.getElementById('htmlTextarea');
 			const saveButton = document.getElementById('saveButton');
 
 			saveButton.addEventListener('click', () => {
